@@ -11,7 +11,7 @@ export default function CloudberryContact() {
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState('')
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
     const form = event.currentTarget
@@ -22,8 +22,30 @@ export default function CloudberryContact() {
     }
 
     setError('')
-    setSubmitted(true)
-    form.reset()
+    setSubmitted(false)
+
+    try {
+      const formData = new FormData(form)
+
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(formData as any).toString(),
+      })
+
+      if (!response.ok) {
+        throw new Error('Form submission failed')
+      }
+
+      setSubmitted(true)
+      form.reset()
+    } catch {
+      setError(
+        'Something went wrong while sending your message. Please try again.'
+      )
+    }
   }
 
   return (
