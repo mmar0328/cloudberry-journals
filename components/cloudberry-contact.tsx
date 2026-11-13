@@ -84,11 +84,12 @@ export default function CloudberryContact() {
               value="cloudberry-contact"
             />
 
-            <input
-              type="hidden"
-              name="bot-field"
-              value=""
-            />
+            <div className="hidden">
+            <label>
+              Don&apos;t fill this out if you&apos;re human:
+              <input name="bot-field" />
+            </label>
+          </div>
 
             <label htmlFor="contact-name">Name</label>
 
@@ -144,6 +145,10 @@ export default function CloudberryContact() {
       <style>{`
         .contact-section {
           background: var(--cloudberry-pale-sage);
+        }
+
+        .hidden {
+          display: none;
         }
 
         .contact-page {
