@@ -36,6 +36,14 @@ export default function CloudberryContact() {
       })
 
       if (!response.ok) {
+        const responseText = await response.text()
+
+        console.error(
+          'Netlify form submission failed:',
+          response.status,
+          responseText
+        )
+
         throw new Error('Form submission failed')
       }
 
@@ -84,12 +92,11 @@ export default function CloudberryContact() {
               value="cloudberry-contact"
             />
 
-            <div className="hidden">
-            <label>
-              Don&apos;t fill this out if you&apos;re human:
-              <input name="bot-field" />
-            </label>
-          </div>
+            <input
+              type="hidden"
+              name="bot-field"
+              value=""
+            />
 
             <label htmlFor="contact-name">Name</label>
 
@@ -145,10 +152,6 @@ export default function CloudberryContact() {
       <style>{`
         .contact-section {
           background: var(--cloudberry-pale-sage);
-        }
-
-        .hidden {
-          display: none;
         }
 
         .contact-page {
