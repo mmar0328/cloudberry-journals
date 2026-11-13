@@ -73,6 +73,8 @@ export default function CloudberryContact() {
             className="contact-form"
             name="cloudberry-contact"
             method="POST"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
             onSubmit={handleSubmit}
             noValidate
           >
@@ -80,6 +82,12 @@ export default function CloudberryContact() {
               type="hidden"
               name="form-name"
               value="cloudberry-contact"
+            />
+
+            <input
+              type="hidden"
+              name="bot-field"
+              value=""
             />
 
             <label htmlFor="contact-name">Name</label>
